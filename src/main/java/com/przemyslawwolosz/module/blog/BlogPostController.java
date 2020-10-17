@@ -21,8 +21,9 @@ public class BlogPostController {
     }
 
     @RequestMapping(params = "/blog/posts", method = RequestMethod.POST)
-    public String createPost() {
-        return "redirect:/blog/posts/" + "0-1-2-3";
+    public String createPost(PostForm postForm) {
+        PostDto postDto=postMemoryStorageService.create(postForm.getTitle(),postForm.getText());
+        return "redirect:/blog/posts/" + postDto.getUuid();
      }
 
     @RequestMapping(path = "/blog/posts/{uuid}", method = RequestMethod.GET)
